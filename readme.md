@@ -1,38 +1,21 @@
-# TASK 1
-
-Your mission, should you choose to accept it ...
-Start the library system.
+# TASK 2
 
 ## Part 1
-
-Think about how the library can store
-information about all the books.
-
-The library needs to know:
-
-1. the book's ISBN (e.g. 123-456-789)
-2. the book's name (e.g. Dorian Gray)
-3. the quantity they have (e.g 100000000000000... 🤷)
-
-See if you can create this.
-Add a few books to start with.
-
-I have added an empty python file called **'library.py'**
-for you to start writing code.
-
-## Part 2 (_this is next week's task_)
 
 The library gets a delivery of new books,
 how can they add these new books to the catalogue?
 
-Write a function which allows the library to
-add these new books to their catalogue.
+We have made a start to this function in class (see library.py file)
 
-### NOTES & HINTS
+Now we have a problem. What happens when we have ordered
+a book which we already have in the library ?
 
-At this stage, do not worry about the while loop
-and menus and other things.
-Focus solely on how you can store the books.
-Then try and write a function to add to the books.
-I am purposely not telling you how to store the books.
-I want you to think about the best way of doing it.
+At the moment, our function overwrites it.
+We would rather it add on.
+
+Example.
+I have 10x 1984 already in my library.
+I receive 5x 1984.
+Now my library has 15x 1984.
+
+Do we need to ask for the name if its already in the library ?
