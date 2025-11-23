@@ -1,21 +1,27 @@
-# TASK 2
+# TASK 3
 
 ## Part 1
 
-The library gets a delivery of new books,
-how can they add these new books to the catalogue?
+We have written a remove_books function.
 
-We have made a start to this function in class (see library.py file)
+It asks for the ISBN
+It checks that ISBN exists
+IF it does
+  it tells the name
+  it asks for quantity to remove
+  then its removes that amount
+ELSE
+  it tells it does not exist in the library
 
-Now we have a problem. What happens when we have ordered
-a book which we already have in the library ?
+### BUT WAIT ???
 
-At the moment, our function overwrites it.
-We would rather it add on.
+What if I input an ISBN, then it tells me the name of the book
+BUT I realise I made a mistake, and I want to type in a different ISBN ?
 
-Example.
-I have 10x 1984 already in my library.
-I receive 5x 1984.
-Now my library has 15x 1984.
+Your task is to implement this functionality.
 
-Do we need to ask for the name if its already in the library ?
+It should ask me, "Do you wanna remove some <<BOOK_NAME>>?".
+IF yes
+  do the removal
+IF no
+  Ask for the ISBN again ... and again ... and again.
