@@ -25,3 +25,5 @@ IF yes
   do the removal
 IF no
   Ask for the ISBN again ... and again ... and again.
+
+
