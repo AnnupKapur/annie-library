@@ -33,9 +33,17 @@ def remove_books():
     isbn = isbn_input()
     book_exists = get_book(isbn)
     if book_exists[0] == True:
-        print(f"You are removing some of {book_exists[1]["name"]}")
-        quantity_to_remove = int(input("Enter the quantity(num) to remove: "))
-        library[isbn]["quantity"] -= quantity_to_remove
+        #if 0 is true then 1 is the book
+        name_of_book = book_exists[1]["name"]
+        #asks the confirmation question with yes or no input
+        confirmation = input(f"Are you sure you want to remove {name_of_book}?' yes/no: ").strip().lower()
+        if confirmation == "yes":
+            quantity_to_remove = int(input("Enter the quantity(num) to remove: "))
+            library[isbn]["quantity"] -= quantity_to_remove
+            print (f"{quantity_to_remove} copies of {name_of_book} have been removed")
+        #when the condition has been satisfied, stop running it - but until that happens, skip whatever is next and go back
+        elif confirmation == "no":
+            return remove_books()            
     else:
         print("Book not in library system")
 
@@ -56,8 +64,7 @@ def print_library():
 # you can run code here to test your stuff works
 # e.g. I have printed the library
 # print library
-print_library()
-
+print_library() 
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
