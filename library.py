@@ -18,30 +18,39 @@ def get_book(isbn):
         return (False, False)
 
 def add_new_book_to_library():
-    isbn = isbn_input()
-    book_exists = get_book(isbn)
-    if book_exists[0] == True:
-        purchase_quantity = int(input("Enter the quantity(num): "))
-        library[isbn]["quantity"] += purchase_quantity
-    else:
-        new_book_name = input("Enter the book name: ")
-        new_quantity = int(input("Enter the quantity(num): "))
-        library[isbn] = { "name": new_book_name, "quantity" : new_quantity }
+    while True:
+        isbn = isbn_input()
+        book_exists = get_book(isbn)
 
-# CHANGE THIS FUNCTION
+        if book_exists[0] == True: 
+            purchase_quantity = int(input("Enter the quantity(num): "))
+            library[isbn]["quantity"] += purchase_quantity
+            print(f"You have added {purchase_quantity} copies of this book to the library")
+        else: 
+            new_book_name = input("Enter the book name: ")
+            new_quantity = int(input("Enter the quantity(num): "))
+            library[isbn] = {"name": new_book_name, "quantity": new_quantity}
+            print(f"You have added '{new_book_name}' with {new_quantity} copies to the library")
+
+        add_more = input("Are there more books to add? yes/no: ").strip().lower()
+        if add_more != "yes":
+            break 
+    print_library()  
+    print("------------------------")
+    print("Exiting library system")
+   
+ 
+        
 def remove_books():
     isbn = isbn_input()
     book_exists = get_book(isbn)
     if book_exists[0] == True:
-        #if 0 is true then 1 is the book
         name_of_book = book_exists[1]["name"]
-        #asks the confirmation question with yes or no input
         confirmation = input(f"Are you sure you want to remove {name_of_book}?' yes/no: ").strip().lower()
         if confirmation == "yes":
             quantity_to_remove = int(input("Enter the quantity(num) to remove: "))
             library[isbn]["quantity"] -= quantity_to_remove
-            print (f"{quantity_to_remove} copies of {name_of_book} have been removed")
-    #go_again asks whether the person wants to remove anymore books    
+            print (f"{quantity_to_remove} copies of {name_of_book} have been removed") 
             go_again = input("Would you like to remove any more books? yes/no: ")
             if go_again == "yes":
                 return remove_books()
@@ -49,11 +58,7 @@ def remove_books():
                 print ("--------------------------------")
                 print ("Exiting library system")
                 print ("--------------------------------")
-
-        #when the condition has been satisfied, stop running it - but until that happens, skip whatever is next and go back
-        elif confirmation == "no":
             return remove_books()
-    #homework asks whether the person wants to try again     
     else:
         print("Book not in library system")
         try_again = input("Would you like to try again? yes/no: ")
@@ -86,5 +91,5 @@ print_library()
 # print the library at the beginning
 # call your function which you have worked on
 # print the library again to test it worked
-remove_books()
-print_library()
+add_new_book_to_library()
+print_library() 
