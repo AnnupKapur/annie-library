@@ -41,11 +41,28 @@ def remove_books():
             quantity_to_remove = int(input("Enter the quantity(num) to remove: "))
             library[isbn]["quantity"] -= quantity_to_remove
             print (f"{quantity_to_remove} copies of {name_of_book} have been removed")
+    #go_again asks whether the person wants to remove anymore books    
+            go_again = input("Would you like to remove any more books? yes/no: ")
+            if go_again == "yes":
+                return remove_books()
+            else:
+                print ("--------------------------------")
+                print ("Exiting library system")
+                print ("--------------------------------")
+
         #when the condition has been satisfied, stop running it - but until that happens, skip whatever is next and go back
         elif confirmation == "no":
             return remove_books()
+    #homework asks whether the person wants to try again     
     else:
         print("Book not in library system")
+        try_again = input("Would you like to try again? yes/no: ")
+        if try_again == "yes":
+            return remove_books ()
+        else:
+            print ("--------------------------------")
+            print ("Exiting library system")
+            print ("--------------------------------")
 
 
 # This is a helper function you can call to print out the current state of the library
@@ -69,5 +86,5 @@ print_library()
 # print the library at the beginning
 # call your function which you have worked on
 # print the library again to test it worked
-remove_books_v2()
-print_library() 
+remove_books()
+print_library()
