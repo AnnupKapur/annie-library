@@ -1,9 +1,9 @@
 library = {
-    "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50},
-    "9780060173227": {"name": "To Kill a Mockingbird", "quantity": 3},
-    "9780140817744": {"name": "1984 - ed1", "quantity": 7},
-    "9780192833983": {"name": "War and Peace", "quantity" : 10},
-    "9780805210408": {"name": "The Trial", "quantity" : 15} 
+    "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50, "genre": "Gothic Horror"},
+    "9780060173227": {"name": "To Kill a Mockingbird", "quantity": 3, "genre": "Southern Gothic"},
+    "9780140817744": {"name": "1984 - ed1", "quantity": 7, "genre": "Dystopian Fiction"},
+    "9780192833983": {"name": "War and Peace", "quantity" : 10, "genre": "Historical Fiction"},
+    "9780805210408": {"name": "The Trial", "quantity" : 15, "genre": "Dystopian Fiction"} 
 }
 
 def isbn_input():
@@ -69,7 +69,6 @@ def remove_books():
             print ("Exiting library system")
             print ("--------------------------------")
 
-
 # This is a helper function you can call to print out the current state of the library
 def print_library():
     print("Here is the current library:")
@@ -91,5 +90,3 @@ print_library()
 # print the library at the beginning
 # call your function which you have worked on
 # print the library again to test it worked
-add_new_book_to_library()
-print_library() 
