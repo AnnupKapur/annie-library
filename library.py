@@ -21,7 +21,7 @@ def add_new_book_to_library():
     isbn = isbn_input()
     book_exists = get_book(isbn)
     if book_exists[0] == True:
-        purchase_quantity_quantity = int(input("Enter the quantity(num): "))
+        purchase_quantity = int(input("Enter the quantity(num): "))
         library[isbn]["quantity"] += purchase_quantity
     else:
         new_book_name = input("Enter the book name: ")
