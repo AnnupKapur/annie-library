@@ -1,29 +1,12 @@
-# TASK 3
+# TASK 3.5
 
-## Part 1
+## Good job
 
-We have written a remove_books function.
+Your next task is to extend your current logic.
+When a user types in an ISBN to remove which does not exist,
+they should be given the option to try again or not.
 
-It asks for the ISBN
-It checks that ISBN exists
-IF it does
-  it tells the name
-  it asks for quantity to remove
-  then its removes that amount
-ELSE
-  it tells it does not exist in the library
+### task
 
-### BUT WAIT ???
-
-What if I input an ISBN, then it tells me the name of the book
-BUT I realise I made a mistake, and I want to type in a different ISBN ?
-
-Your task is to implement this functionality.
-
-It should ask me, "Do you wanna remove some <<BOOK_NAME>>?".
-IF yes
-  do the removal
-IF no
-  Ask for the ISBN again ... and again ... and again.
-
-
+Implement this in your function - using the return call_function method
+Not a while loop

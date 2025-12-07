@@ -43,7 +43,7 @@ def remove_books():
             print (f"{quantity_to_remove} copies of {name_of_book} have been removed")
         #when the condition has been satisfied, stop running it - but until that happens, skip whatever is next and go back
         elif confirmation == "no":
-            return remove_books()            
+            return remove_books()
     else:
         print("Book not in library system")
 
@@ -69,3 +69,5 @@ print_library()
 # print the library at the beginning
 # call your function which you have worked on
 # print the library again to test it worked
+remove_books_v2()
+print_library() 
