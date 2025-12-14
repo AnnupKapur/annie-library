@@ -1,23 +1,13 @@
-# TASK 3.5
+# TASK 4
 
-## Good job
+Now we deal with members
 
-Your next task is to extend your current logic.
-When a user types in an ISBN to remove which does not exist,
-they should be given the option to try again or not.
+## Your tasks
 
-### task
+1. Add a book search function (search by book name)
 
-Implement this in your function - using the return call_function method
-Not a while loop
+2. What about the ISBN -- can you book search return the ISBN of the book
 
-#### Cheat-sheet
-
-- `cd` is for moving between files
-  - `cd ..` move up the tree
-  - `cd ~` send you to home directory
-
-- `git add .` add all the changes (the plus button in vscode)
-- `git commit -m "cool message"` commit and add a message
-- `git push` push all the changes to git
-- `git pull` pull all the changes from git
+_[Note]_
+There is a really easy **NO CODE** method of returning the ISBN.
+Lets see if you can figure it out!
