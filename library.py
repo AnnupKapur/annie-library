@@ -3,7 +3,9 @@ library = {
     "9780060173227": {"name": "To Kill a Mockingbird", "quantity": 3, "genre": "Southern Gothic"},
     "9780140817744": {"name": "1984 - ed1", "quantity": 7, "genre": "Dystopian Fiction"},
     "9780192833983": {"name": "War and Peace", "quantity" : 10, "genre": "Historical Fiction"},
-    "9780805210408": {"name": "The Trial", "quantity" : 15, "genre": "Dystopian Fiction"} 
+    "9780805210408": {"name": "The Trial", "quantity" : 15, "genre": "Dystopian Fiction"},
+    "9780141040349": {"name": "Pride and Prejudice", "quantity": 25, "genre": "Romance Fiction"},
+    "9780141439556": {"name": "Wuthering Heights", "quantity": 30, "genre": "Gothic Fiction"}
 }
 
 def isbn_input():
@@ -73,6 +75,25 @@ def remove_books():
         else:
             print_exit_library()
 
+def search_by_book_name():
+    while True:
+        searched_name = input("Enter book name: ").strip().lower()
+        if_its_found = False
+
+        for book in library.values():
+            if searched_name in book["name"].strip().lower():  
+                print(f"{book['name']} - x {book['quantity']}")
+                if_its_found = True
+
+        if not if_its_found:
+            print("Book not found in the library.")
+
+        go_again = input("Would you like to search for another book? yes/no: ").strip().lower()
+        if go_again != "yes":
+            print_exit_library()
+            break
+               
+
 # This is a helper function you can call to print out the current state of the library
 def print_library():
     print("Here is the current library:")
@@ -89,7 +110,7 @@ def print_library():
 # you can run code here to test your stuff works
 # e.g. I have printed the library
 # print library
-print_library() 
+search_by_book_name()
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
