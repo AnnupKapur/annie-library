@@ -80,9 +80,10 @@ def search_by_book_name():
         searched_name = input("Enter book name: ").strip().lower()
         if_its_found = False
 
-        for book in library.values():
+        for isbn in library.keys():
+            book = library[isbn]
             if searched_name in book["name"].strip().lower():  
-                print(f"{book['name']} - x {book['quantity']}")
+                print(f"{isbn} :: {book['name']} - x {book['quantity']}")
                 if_its_found = True
 
         if not if_its_found:
@@ -92,7 +93,6 @@ def search_by_book_name():
         if go_again != "yes":
             print_exit_library()
             break
-               
 
 # This is a helper function you can call to print out the current state of the library
 def print_library():
