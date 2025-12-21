@@ -8,6 +8,39 @@ library = {
     "9780141439556": {"name": "Wuthering Heights", "quantity": 30, "genre": "Gothic Fiction"}
 }
 
+members = {
+    "0001": { 
+        "name": "Annika",
+        "dob": { "day": 25, "month": 1, "year": 1996 },
+        "address": "84 Broadway North, Walsall, WS1 2QF",
+        "books_borrowed": [ "9780192833655", "9780141040349", "9780805210408" ]
+    }
+}
+
+def get_next_id():
+    current = len(members)
+    new = current + 1
+    return f"{new:04}"
+
+def add_members():
+    name = input("Enter your name: ")
+    print("Enter you DOB:")
+    day = int(input(" - Day: "))
+    month = int(input(" - Month: "))
+    year = int(input(" - Year: "))
+    address  = input("Enter your address: ")
+    new_id = get_next_id()
+    members[new_id] = {
+        "name": name,
+        "dob": {
+            "day": day,
+            "month": month,
+            "year": year,
+        },
+        "address": address,
+        "books_borrowed": [],
+    }
+
 def isbn_input():
     isbn = input("Enter the ISBN : ")
     return isbn
@@ -106,11 +139,32 @@ def print_library():
     print("")
     print("")
 
+# This is a helper function you can call to print out the current state of the members 
+def print_members():
+    print("Here is the current library members")
+    print("===================================")
+    for memberId in members:
+        member = members[memberId]
+        name = member["name"]
+        dob = member["dob"]
+        dob_formatted = str(dob["day"]) + str(dob["month"]) + str(dob["year"])
+        address = member["address"]
+        print(f"name: {name}")
+        print(f"dob: {dob_formatted}")
+        print(f"address: {address}")
+        print("-----------------------------------")
+        print("books: ")
+        for isbn in member["books_borrowed"]:
+            book = get_book(isbn)
+            if book[0] == True:
+                print(f"   {isbn} :: {book[1]['name']}")
+        print("===================================")
+
 
 # you can run code here to test your stuff works
 # e.g. I have printed the library
 # print library
-search_by_book_name()
+print_members()
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
