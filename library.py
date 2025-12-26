@@ -1,11 +1,14 @@
 library = {
     "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50, "genre": "Gothic Horror"},
     "9780060173227": {"name": "To Kill a Mockingbird", "quantity": 3, "genre": "Southern Gothic"},
-    "9780140817744": {"name": "1984 - ed1", "quantity": 7, "genre": "Dystopian Fiction"},
+    "9780140817744": {"name": "1984", "quantity": 7, "genre": "Dystopian Fiction"},
     "9780192833983": {"name": "War and Peace", "quantity" : 10, "genre": "Historical Fiction"},
     "9780805210408": {"name": "The Trial", "quantity" : 15, "genre": "Dystopian Fiction"},
     "9780141040349": {"name": "Pride and Prejudice", "quantity": 25, "genre": "Romance Fiction"},
-    "9780141439556": {"name": "Wuthering Heights", "quantity": 30, "genre": "Gothic Fiction"}
+    "9780141439556": {"name": "Wuthering Heights", "quantity": 30, "genre": "Gothic Fiction"},
+    "9780198840824": {"name": "Frankenstein", "quantity": 2, "genre": "Science Fiction"},
+    "9780140449242": {"name": "The Brothers Karamazov", "quantity": 5, "genre": "Philosophical Fiction"},
+    "9780140449174": {"name": "Anna Karenina", "quantity": 8, "genre": "Romantic Fiction"}
 }
 
 members = {
@@ -40,6 +43,105 @@ def add_members():
         "address": address,
         "books_borrowed": [],
     }
+
+def access_id_number():
+    user_id_input = input("Enter your ID number: ").strip().lower()
+    if user_id_input in members:
+        print(f'Are you {members[user_id_input]["name"]}?')
+        user_choice = input("yes/no ").strip().lower()
+        if user_choice == "yes":
+            print (f"Welcome to your library service!")
+        else:
+            print("Do you need to create a library account?")
+            user_choice_two = input("yes/no ").strip().lower()
+            if user_choice_two == "yes":
+                return add_members()
+            else:
+                print("There is a problem with the service, please go to the desk to resolve the issue.")
+    else:
+        print("Member does not exist. Do you need to create a new membership")
+        user_choice_two = input("yes/no ").strip().lower()
+        if user_choice_two == "yes":
+            return add_members()
+        else:
+            print("Exiting library service")
+
+def borrow_books():
+    member_id = input("Enter your member ID: ").strip()
+    if member_id not in members:
+        print("Member not found.")
+        return access_id_number()
+
+    member = members[member_id]
+    book_name_input = input("Enter the name of the book you would like to borrow: ").strip().lower()
+
+    for isbn, book_in_stock in library.items():
+        if book_in_stock["name"].strip().lower() == book_name_input:
+            print(f"Before borrowing, quantity: {book_in_stock['quantity']}")
+            if book_in_stock["quantity"] > 0:
+                library[isbn]["quantity"] -= 1
+                member["books_borrowed"].append(isbn)
+                print(f"{member['name']} has borrowed '{book_in_stock['name']}' (ISBN: {isbn})")
+                print(f"After borrowing, quantity: {library[isbn]['quantity']}")
+                print("Would you like to borrow another book?")
+                borrow_another_book = input("yes/no: ").strip().lower()
+                if borrow_another_book == "yes":
+                    return borrow_books() 
+                else:
+                    return print_exit_library()
+            else:
+                print(f"Sorry, '{book_in_stock['name']}' is currently out of stock.")
+                print("Would you like to check the library for a different book?")
+                check_a_different_book = input("yes/no: ").strip().lower()
+                if check_a_different_book == "yes":
+                    return borrow_books()
+                else:
+                    return print_exit_library()  
+
+    print("Book not found in library.")
+    print("Would you like to try again?")
+    try_again = input("yes/no ")
+    if try_again == "yes":
+        return borrow_books()
+    else:
+        return print_exit_library() 
+
+
+def return_books():
+    member_id = input("Enter your member ID: ").strip()
+    if member_id not in members:
+        print("Member not found.")
+        return access_id_number()
+    
+    member = members[member_id]
+    book_name_input = input("Enter the name of the book you would like to return: ").strip().lower()
+
+    for isbn, book_in_returns in library.items():
+        if book_in_returns["name"].strip().lower() == book_name_input:
+            print(f"Before returning, quantity: {book_in_returns['quantity']}")
+        if book_in_returns["name"] == library[isbn]["name"]: 
+                library[isbn]["quantity"] += 1
+                member["books_borrowed"].remove(isbn)
+                print(f"{member['name']} has returned '{book_in_returns['name']}' (ISBN: {isbn})")
+                print(f"After returning, quantity: {library[isbn]['quantity']}")
+                print("Would you like to return another book?")
+                return_another_book = input("yes/no: ").strip().lower()
+                if return_another_book == "yes":
+                    return return_books() 
+                else:
+                    return print_exit_library()
+
+
+
+
+
+
+
+
+
+
+
+
 
 def isbn_input():
     isbn = input("Enter the ISBN : ")
@@ -164,7 +266,8 @@ def print_members():
 # you can run code here to test your stuff works
 # e.g. I have printed the library
 # print library
-print_members()
+return_books()
+print_library()
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
