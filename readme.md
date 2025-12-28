@@ -1,28 +1,21 @@
-# TASK 5
-
-Now we deal with members
-
-In lesson,
-We added the members dictionary to store the members.
-We also created a function to 'add' a new member to this dictionary.
-
-Now, we need to allow them to borrow books.
+# TASK 5.1
 
 ## Your Task
 
-1. Write a function to 'borrow'/'return' a book
+Extract all the functions into their own files, making the code easier to work with.
 
-### Hint
+You can decide how to organise it.
 
-Member can only borrow books which are _'in-stock'_.
+What should the files be called?
 
-How can we know if we have a book in-stock ?
-_we have a quantity in our library dictionary,
-could we increment / decrement this number
-when a member returns / borrows a book_
+Which functions belong in the same files (if any)?
 
-#### BONUS TASK
+Should they be in different folders?
 
-Is there a limit to how many books you want to allow a member to
-borrow at any one time ?
-E.g. a member may only have 5 books actively borrowed at any one time.
+### BONUS TASK
+
+Write a function to:
+check if a member exists using their member ID (returns the member, or returns false)
+
+Note:
+(do not worry about asking if they wanna create a membership)
