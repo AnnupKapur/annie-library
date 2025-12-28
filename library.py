@@ -1,3 +1,11 @@
+from utils.get_book import get_book
+from utils.get_book import search_by_book_name
+from utils.comms import isbn_input
+from utils.comms import print_exit_library
+from utils.helper import print_members
+from utils.helper import print_library 
+from utils.helper import dob_format
+
 library = {
     "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50, "genre": "Gothic Horror"},
     "9780060173227": {"name": "To Kill a Mockingbird", "quantity": 3, "genre": "Southern Gothic"},
@@ -43,126 +51,23 @@ def add_members():
         "address": address,
         "books_borrowed": [],
     }
+    return new_id
 
-def access_id_number():
-    user_id_input = input("Enter your ID number: ").strip().lower()
-    if user_id_input in members:
-        print(f'Are you {members[user_id_input]["name"]}?')
-        user_choice = input("yes/no ").strip().lower()
-        if user_choice == "yes":
-            print (f"Welcome to your library service!")
-        else:
-            print("Do you need to create a library account?")
-            user_choice_two = input("yes/no ").strip().lower()
-            if user_choice_two == "yes":
-                return add_members()
-            else:
-                print("There is a problem with the service, please go to the desk to resolve the issue.")
-    else:
-        print("Member does not exist. Do you need to create a new membership")
-        user_choice_two = input("yes/no ").strip().lower()
-        if user_choice_two == "yes":
-            return add_members()
-        else:
-            print("Exiting library service")
-
-def borrow_books():
-    member_id = input("Enter your member ID: ").strip()
-    if member_id not in members:
-        print("Member not found.")
-        return access_id_number()
-
-    member = members[member_id]
-    book_name_input = input("Enter the name of the book you would like to borrow: ").strip().lower()
-
-    for isbn, book_in_stock in library.items():
-        if book_in_stock["name"].strip().lower() == book_name_input:
-            print(f"Before borrowing, quantity: {book_in_stock['quantity']}")
-            if book_in_stock["quantity"] > 0:
-                library[isbn]["quantity"] -= 1
-                member["books_borrowed"].append(isbn)
-                print(f"{member['name']} has borrowed '{book_in_stock['name']}' (ISBN: {isbn})")
-                print(f"After borrowing, quantity: {library[isbn]['quantity']}")
-                print("Would you like to borrow another book?")
-                borrow_another_book = input("yes/no: ").strip().lower()
-                if borrow_another_book == "yes":
-                    return borrow_books() 
-                else:
-                    return print_exit_library()
-            else:
-                print(f"Sorry, '{book_in_stock['name']}' is currently out of stock.")
-                print("Would you like to check the library for a different book?")
-                check_a_different_book = input("yes/no: ").strip().lower()
-                if check_a_different_book == "yes":
-                    return borrow_books()
-                else:
-                    return print_exit_library()  
-
-    print("Book not found in library.")
-    print("Would you like to try again?")
-    try_again = input("yes/no ")
-    if try_again == "yes":
-        return borrow_books()
-    else:
-        return print_exit_library() 
-
-
-def return_books():
-    member_id = input("Enter your member ID: ").strip()
-    if member_id not in members:
-        print("Member not found.")
-        return access_id_number()
-    
-    member = members[member_id]
-    book_name_input = input("Enter the name of the book you would like to return: ").strip().lower()
-
-    for isbn, book_in_returns in library.items():
-        if book_in_returns["name"].strip().lower() == book_name_input:
-            print(f"Before returning, quantity: {book_in_returns['quantity']}")
-        if book_in_returns["name"] == library[isbn]["name"]: 
-                library[isbn]["quantity"] += 1
-                member["books_borrowed"].remove(isbn)
-                print(f"{member['name']} has returned '{book_in_returns['name']}' (ISBN: {isbn})")
-                print(f"After returning, quantity: {library[isbn]['quantity']}")
-                print("Would you like to return another book?")
-                return_another_book = input("yes/no: ").strip().lower()
-                if return_another_book == "yes":
-                    return return_books() 
-                else:
-                    return print_exit_library()
-
-
-
-
-
-
-
-
-
-
-
-
-
-def isbn_input():
-    isbn = input("Enter the ISBN : ")
-    return isbn
-
-def get_book(isbn):
-    if isbn in library:
-        book = library[isbn]
-        return (True, book)
-    else:
-        return (False, False)
-
-def print_exit_library():
-    print ("--------------------------------")
-    print ("Exiting library system")
-    print ("--------------------------------")
+def create_member_flow(members):
+    new_member_id = add_members()
+    print("Welcome")
+    name = members[new_member_id]["name"]
+    dob = dob_format(members[new_member_id]["dob"])
+    address = members[new_member_id]["address"]
+    print(f"{name} : {dob}")
+    print(f"{address}")
+    print("-----------------------------")
+    return new_member_id
 
 def add_new_book_to_library():
     while True:
         isbn = isbn_input()
-        book_exists = get_book(isbn)
+        book_exists = get_book(isbn, library)
 
         if book_exists[0] == True: 
             purchase_quantity = int(input("Enter the quantity(num): "))
@@ -182,7 +87,7 @@ def add_new_book_to_library():
  
 def remove_books():
     isbn = isbn_input()
-    book_exists = get_book(isbn)
+    book_exists = get_book(isbn, library)
 
     if book_exists[0] == True:
         name_of_book = book_exists[1]["name"]
@@ -210,64 +115,13 @@ def remove_books():
         else:
             print_exit_library()
 
-def search_by_book_name():
-    while True:
-        searched_name = input("Enter book name: ").strip().lower()
-        if_its_found = False
-
-        for isbn in library.keys():
-            book = library[isbn]
-            if searched_name in book["name"].strip().lower():  
-                print(f"{isbn} :: {book['name']} - x {book['quantity']}")
-                if_its_found = True
-
-        if not if_its_found:
-            print("Book not found in the library.")
-
-        go_again = input("Would you like to search for another book? yes/no: ").strip().lower()
-        if go_again != "yes":
-            print_exit_library()
-            break
-
-# This is a helper function you can call to print out the current state of the library
-def print_library():
-    print("Here is the current library:")
-    print("-----------------------------------")
-    for book in library:
-        qty = library[book]["quantity"]
-        name = library[book]["name"]
-        print(f"{qty:2}x {name}")
-    print("-----------------------------------")
-    print("")
-    print("")
-
-# This is a helper function you can call to print out the current state of the members 
-def print_members():
-    print("Here is the current library members")
-    print("===================================")
-    for memberId in members:
-        member = members[memberId]
-        name = member["name"]
-        dob = member["dob"]
-        dob_formatted = str(dob["day"]) + str(dob["month"]) + str(dob["year"])
-        address = member["address"]
-        print(f"name: {name}")
-        print(f"dob: {dob_formatted}")
-        print(f"address: {address}")
-        print("-----------------------------------")
-        print("books: ")
-        for isbn in member["books_borrowed"]:
-            book = get_book(isbn)
-            if book[0] == True:
-                print(f"   {isbn} :: {book[1]['name']}")
-        print("===================================")
 
 
 # you can run code here to test your stuff works
 # e.g. I have printed the library
 # print library
-return_books()
-print_library()
+print_members(members, library)
+print_library(library)
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
