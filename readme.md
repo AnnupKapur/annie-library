@@ -1,21 +1,24 @@
-# TASK 5.1
+# TASK 6
+
+So far we can:
+
+- add books to the library
+- remove books from the library
+- add members to the library
+- remove members from the library
 
 ## Your Task
 
-Extract all the functions into their own files, making the code easier to work with.
+Write some functions !!!!
 
-You can decide how to organise it.
+1. A function to check if the member has exceeded the
+max borrow limit
 
-What should the files be called?
+2. A function to reduce the book count in the library
 
-Which functions belong in the same files (if any)?
+3. A function to add a book (isbn) to a member's borrowed books
 
-Should they be in different folders?
+### Note
 
-### BONUS TASK
-
-Write a function to:
-check if a member exists using their member ID (returns the member, or returns false)
-
-Note:
-(do not worry about asking if they wanna create a membership)
+Do not write any checks etc. We will pull these functions
+together next week.

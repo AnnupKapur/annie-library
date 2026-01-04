@@ -1,16 +1,6 @@
-from utils.get_book import get_book
-from utils.get_book import search_by_book_name
-from utils.comms import isbn_input
-from print_functions.print_exit_library import print_exit_library
 from utils.helper import print_members
 from utils.helper import print_library 
-from utils.helper import dob_format
-from members.get_next_id import get_next_id
-from members.add_members import add_members 
-from members.create_member_flow import create_member_flow 
-from members.check_for_member import check_for_member 
-from librarian.add_new_book import add_new_book 
-
+from members.remove_member import delete_member_flow
 
 library = {
     "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50, "genre": "Gothic Horror"},
@@ -33,7 +23,6 @@ members = {
         "books_borrowed": [ "9780192833655", "9780141040349", "9780805210408" ]
     }
 }
-ß
 
 
 # you can run code here to test your stuff works
@@ -41,7 +30,7 @@ members = {
 # print library
 print_members(members, library)
 print_library(library)
-check_for_member(members)
+delete_member_flow(members, library)
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on

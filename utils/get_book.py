@@ -5,11 +5,6 @@ def get_book(isbn, library):
     else:
         return (False, False)
 
-def print_book_list(book_dict):
-    for isbn in book_dict.keys():
-        book = book_dict[isbn]
-        print(f"{isbn} :: {book['name']} - x {book['quantity']}")
-
 def search_by_book_name(library):
     searched_name = input("Enter book name: ").strip().lower()
     books_found = {}

@@ -1,5 +1,3 @@
-#create_member_flow
-
 def create_member_flow(members):
     new_member_id = add_members(members)
     print("Welcome")

@@ -1,4 +1,4 @@
-#add_members
+from members.get_next_id import get_next_id
 
 def add_members(members):
     name = input("Enter your name: ")

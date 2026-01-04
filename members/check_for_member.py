@@ -1,9 +1,6 @@
-#check_for_member
-
-def check_for_member(members):
+def check_member_by_id(members):
     member_id = input("Enter Member ID: ")
-    member = check_for_member(members, member_id)
-    if member:
-    print("You are:", member["name"])
+    if member_id in members:
+        return (member_id, members[member_id])
     else:
-    print("Membership does not exist.")
+        return False

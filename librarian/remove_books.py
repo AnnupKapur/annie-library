@@ -1,6 +1,7 @@
-#remove_books 
-
-
+from print_functions.print_exit_library import print_exit_library
+from utils.helper import print_library 
+from utils.comms import isbn_input
+from utils.get_book import get_book
 
 def remove_books(library):
     isbn = isbn_input(library)
@@ -27,7 +28,7 @@ def remove_books(library):
         try_again = input("Would you like to try again? yes/no: ").strip().lower()
 
         if try_again == "yes":
-            return remove_books (library)
+            return remove_books(library)
 
         else:
             print_exit_library(library)
