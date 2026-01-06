@@ -1,6 +1,6 @@
 from print_functions.print_exit_library import print_exit_library
 from utils.helper import print_library 
-from utils.comms import isbn_input
+from utils.isbn_input import isbn_input
 from utils.get_book import get_book
 
 def remove_books(library):
