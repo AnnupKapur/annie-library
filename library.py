@@ -1,6 +1,8 @@
 from utils.helper import print_members
 from utils.helper import print_library 
 from members.remove_member import delete_member_flow
+from members.can_member_borrow import can_member_borrow_a_book 
+
 
 library = {
     "9780192833655": {"name": "The Picture of Dorian Gray", "quantity": 50, "genre": "Gothic Horror"},
@@ -30,7 +32,7 @@ members = {
 # print library
 print_members(members, library)
 print_library(library)
-delete_member_flow(members, library)
+can_member_borrow_a_book(members,library) 
 # how to test your stuff
 # print the library at the beginning
 # call your function which you have worked on
