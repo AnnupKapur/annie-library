@@ -3,10 +3,12 @@ from print_functions import print_exit_library
 
 def reduce_book_count(library, isbn):
     if isbn not in library:
+        print("Book Not Found")
         return
+
     if library[isbn]["quantity"] > 0:
         library[isbn]["quantity"] -= 1
-        print("1 copy of this book has successfully been removed!")
+        book_name = library[isbn]["name"]
+        print(f"Removed 1 copy of {book_name}")
     else:
         print("No Copies Left.")
-        print_exit_library(library)            

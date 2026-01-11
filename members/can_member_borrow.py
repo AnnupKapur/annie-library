@@ -1,10 +1,8 @@
-def can_member_borrow_a_book(members,library):
-    member_id = input("Enter Member ID: ")
-    if member_id in members:
-        if len(members[member_id]["books_borrowed"]) < 5:
-            return True
-        else:
-            return False
+def check_member_can_borrow(member):
+    if member["books_borrowed"] < 5:
+        return True
     else:
-        print("Member Not Found") 
-
+        member_name = member["name"]
+        print(f"{member_name} has already borrowed the maximum of 5 books")
+        print("Please return before borrowing more.")
+        return False
