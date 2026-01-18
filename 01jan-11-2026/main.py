@@ -1,5 +1,5 @@
 def main():
-    start_position = 50
+    position = 50
     count_of_zeros = 0
 
     with open("./input.txt") as file:
@@ -8,19 +8,21 @@ def main():
             if not line:
                 continue
 
-            direction = line[0]
-            amount = int(line[1:])
+            direction = line[0] # 'R' or 'L'
+            amount = int(line[1:]) # number of steps to move
 
             if direction == "R":
-                start_position = (start_position + amount) % 100
+                position = (position + amount) % 100
             elif direction == "L":
-                start_position = (start_position - amount) % 100
+                position = (position - amount) % 100
 
-            if start_position == 0:
+            if position == 0:
                 count_of_zeros += 1
 
+    print("")
+    print("Answer: ")
     print(count_of_zeros)
+    print("")
 
 
 main()
-
